@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  starting_weight :decimal(, )
+#  up_by           :decimal(, )
+#
+
 class Person < ActiveRecord::Base
 
   has_many :checkins
