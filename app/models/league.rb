@@ -11,4 +11,5 @@
 class League < ActiveRecord::Base
   has_many :people, -> { distinct }
   has_and_belongs_to_many :events
+  validates_uniqueness_of :name
 end

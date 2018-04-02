@@ -1,7 +1,11 @@
 class PeopleController < ApplicationController
   def create
-    @person = Person.create(person_params)
-    CreateCheckin.call(@person, Event.last, checkin_params[:weight].to_f, current_user)
+    ActiveRecord::Base.transaction do
+      @person = Person.create(person_params)
+      @league = League.where(name: league_name_params).first_or_create!
+      @person.update!(league: @league)
+      CreateCheckin.call(@person, Event.last, checkin_params[:weight].to_f, current_user)
+    end
     redirect_to people_path
   end
 
@@ -25,6 +29,10 @@ class PeopleController < ApplicationController
   private
   def person_params
     params.required(:person).permit([:name])
+  end
+
+  def league_name_params
+    params.required(:person).permit([:league_name])[:league_name]
   end
 
   def checkin_params
