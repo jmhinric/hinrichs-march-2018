@@ -15,12 +15,12 @@
       - previous_up_by = up_by
       %tr
         %td{class: 'ordinal'}= current_rank
-        %td{class: 'person-name'}= link_to(person.name.upcase, person_path(person))
+        %td{class: 'person-name'}= link_to(person.name.upcase, event_person_path(@event, person))
         %td{class: "#{positive} text-right weight"}= "#{up_by.round(3)} #{person.percentage_change.round(2)}"
     - @unranked_people.each do |person|
       %tr
         %td
-        %td{class: 'person-name'}= link_to(person.name.upcase, person_path(person))
+        %td{class: 'person-name'}= link_to(person.name.upcase, event_person_path(@event, person))
         %td
 
 %br
@@ -29,4 +29,4 @@
 %br
 %br
 = link_to('OTHER EVENTS', events_path)
-= link_to('CHECK IN', new_checkin_path, class: 'btn btn-default btn-block navbar navbar-fixed-bottom button-link') unless ENV['QUIET_MODE']
+= link_to('CHECK IN', new_event_checkin_path(@event), class: 'btn btn-default btn-block navbar navbar-fixed-bottom button-link') unless ENV['QUIET_MODE']

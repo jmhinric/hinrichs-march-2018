@@ -4,7 +4,7 @@
   %table
     %tr
       %td{class: 'ordinal'}= index
-      %td{class: "text-left"}=link_to(person.name, person_path(person.id))
+      %td{class: "text-left"}=link_to(person.name, event_person_path(@event, person))
       %td{class: "text-left weight"}=person.up_by(@event)
   %br
 %br
@@ -13,4 +13,4 @@
 %br
 %br
 %h3
-  %a= link_to('< Back', people_path, class: 'btn btn-default btn-block navbar navbar-fixed-bottom')
+  %a= link_to('< Back', events_path, class: 'btn btn-default btn-block navbar navbar-fixed-bottom')
