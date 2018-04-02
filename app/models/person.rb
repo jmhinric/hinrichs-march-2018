@@ -25,8 +25,8 @@ class Person < ActiveRecord::Base
   end
 
   def percentage_change
-    return unless up_by
-    @percentage_change ||= starting_weight ?  up_by.to_f / starting_weight * 100 : nil
+    return unless starting_weight && up_by
+    @percentage_change ||= up_by.to_f / starting_weight * 100
   end
 
   def checkin_diffs

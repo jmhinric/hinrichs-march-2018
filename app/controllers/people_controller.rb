@@ -6,10 +6,16 @@ class PeopleController < ApplicationController
   end
 
   def index
-    @event = Event.last
+    @event = Event.includes(:people).last
     unless @event
       redirect_to new_event_path
     end
+    people = @event.people
+    @ranked_people = people
+      .select { |p| p.up_by }
+      .sort_by { |p| [ p.up_by, p.percentage_change ] }
+      .reverse
+    @unranked_people = people - @ranked_people
   end
 
   def show
