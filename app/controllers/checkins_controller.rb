@@ -12,7 +12,7 @@ class CheckinsController < ApplicationController
   end
 
   def new
-    @people = Person.all.order(:name)
+    @people = @event.people.order(:name)
   end
 
   private
@@ -22,7 +22,7 @@ class CheckinsController < ApplicationController
   end
 
   def load_event
-    @event = Event.find(event_id)
+    @event = Event.includes(:people).find(event_id)
   end
 
   def checkin_params

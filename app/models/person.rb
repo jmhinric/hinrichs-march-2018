@@ -16,7 +16,12 @@ class Person < ActiveRecord::Base
   belongs_to :league
   has_many :checkins
   has_many :user_person_joins
+  # How can a person have many users?  I'm not sure what this is going towards.
   has_many :users, through: :user_person_joins
+  # TODO: the User and Person models need to be clarified.
+  #   'name' should be an attribute of User, and this model should have a user_id.
+  #   This model could also maybe be renamed to something like 'Participation.'
+  validates_uniqueness_of :name
 
   def up_by(event=nil)
     return attributes['up_by'] unless event

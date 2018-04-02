@@ -1,5 +1,6 @@
 %h1{class: 'text-center'}= "WEIGH-IN #{@event.name}"
 %h2{class: 'text-center'}= @event.tagline
-= render(partial: "shared/leaderboard", locals: { show_league: true })
-= link_to('OTHER EVENTS', events_path)
+%h2{class: 'text-center'}= @league.name
+= render(partial: "shared/leaderboard", locals: { show_league: false })
+= link_to("BACK TO #{@event.name.upcase}", event_people_path(@event))
 = link_to('CHECK IN', new_event_checkin_path(@event), class: 'btn btn-default btn-block navbar navbar-fixed-bottom button-link') unless ENV['QUIET_MODE']
