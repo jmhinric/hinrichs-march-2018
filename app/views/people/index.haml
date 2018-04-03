@@ -2,4 +2,6 @@
 %h2{class: 'text-center'}= @event.tagline
 = render(partial: "shared/leaderboard", locals: { show_league: true })
 = link_to('OTHER EVENTS', events_path)
-= link_to('CHECK IN', new_event_checkin_path(@event), class: 'btn btn-default btn-block navbar navbar-fixed-bottom button-link') unless ENV['QUIET_MODE']
+%br
+%br
+= link_to('CHECK IN', new_event_checkin_path(@event), class: 'btn btn-default btn-block navbar button-link') unless ENV['QUIET_MODE']

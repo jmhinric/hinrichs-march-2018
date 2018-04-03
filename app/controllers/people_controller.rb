@@ -20,9 +20,6 @@ class PeopleController < ApplicationController
 
   def index
     @event = Event.includes(people: :league).find(event_id)
-    unless @event
-      redirect_to new_event_path
-    end
     # The Person model holds a starting_weight, so people must be unique to events.
     @people = @event.people
   end

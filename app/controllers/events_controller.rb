@@ -9,7 +9,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create(event_params)
-    redirect_to event_path(@event)
+    redirect_to event_people_path(@event)
   end
 
   private
