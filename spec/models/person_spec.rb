@@ -13,6 +13,23 @@ describe Person do
   let(:c5) { CreateCheckin.call(person, e2, 202, user)}
   let(:c6) { CreateCheckin.call(person, e2, 303, user)}
 
+  describe 'validations' do
+    let(:existing_name) { "Existing name" }
+    let(:person2) { Person.create!(name: existing_name) }
+
+    context '#uniqueness_of_name_per_event' do
+      it 'is valid with no name or event' do
+        expect(person).to be_valid
+      end
+      it 'is valid with a name but no event' do
+        expect(Person.create(name: "Joe")).to be_valid
+      end
+      it 'is not valid if the event already has someone of the same name' do
+        person2.update(event: e1)
+        expect(Person.create(name: existing_name, event: e1)).to_not be_valid
+      end
+    end
+  end
   describe '#up_by' do
     subject { person.up_by }
     context 'with no event specified' do

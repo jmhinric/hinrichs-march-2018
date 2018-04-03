@@ -1,4 +1,9 @@
 %h1 New Person
+- flash.each do |key, value|
+  .alert{ :class => "alert-#{key}" }
+    %button.close{ :data => { :dismiss => "alert" } } x
+    %strong
+      = value
 .input-group
   = form_for :person, url: event_people_path do |f|
     %p

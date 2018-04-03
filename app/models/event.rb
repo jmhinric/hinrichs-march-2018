@@ -13,6 +13,6 @@ class Event < ActiveRecord::Base
   default_scope { order(created_at: :asc) }
 
   has_many :checkins
-  has_many :people, -> { distinct }, through: :checkins
+  has_many :people, -> { distinct }
   has_and_belongs_to_many :leagues
 end

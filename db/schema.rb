@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402031910) do
+ActiveRecord::Schema.define(version: 20180402134940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,8 +66,10 @@ ActiveRecord::Schema.define(version: 20180402031910) do
     t.decimal  "starting_weight"
     t.decimal  "up_by"
     t.integer  "league_id"
+    t.integer  "event_id"
   end
 
+  add_index "people", ["event_id"], name: "index_people_on_event_id", using: :btree
   add_index "people", ["league_id"], name: "index_people_on_league_id", using: :btree
 
   create_table "user_location_joins", force: true do |t|
