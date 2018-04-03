@@ -38,6 +38,12 @@ gem 'pry-rails'
 gem 'factory_bot_rails'
 gem 'faker'
 
+# Annotate schema into models
+# annotate --exclude tests,fixtures,factories,serializers
+gem 'annotate', github: 'ctran/annotate_models'
+
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
   gem 'pry'

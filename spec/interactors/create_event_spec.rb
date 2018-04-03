@@ -11,7 +11,8 @@ describe CreateEvent do
     expect{subject}.to change{Event.count}.by(1)
   end
 
-  it 'blanks starting_weight and up_by' do
+  # Changes to the data modeling eliminated this expectation
+  xit 'blanks starting_weight and up_by' do
     subject
     person.reload
     expect(person.starting_weight).to be(nil)

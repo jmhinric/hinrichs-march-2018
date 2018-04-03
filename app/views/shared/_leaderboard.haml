@@ -1,0 +1,37 @@
+%div{class: 'table-container'}
+  %table{border: 0, class: 'table table-condensed borderless'}
+    %tr
+      %th{class: 'ordinal'}
+      %th{class: 'text-left person-name'} NAME
+      - if show_league
+        %th{class: 'text-left person-name'} LEAGUE NAME
+      %th{:'data-field' => 'up_by', :'data-sortable' => 'true', class: 'text-right weight'} UP BY
+    - ranked_people = @people.select { |p| p.up_by }.sort_by { |p| [p.up_by, p.percentage_change] }.reverse
+    - unranked_people = @people - ranked_people
+
+    - previous_up_by = 0
+    - current_rank = 1
+    - ranked_people.each_with_index do |person, index|
+      - up_by = person.up_by
+      - positive = up_by.to_d > 0 ? 'positive' : 'negative'
+      - current_rank = index + 1 if up_by.to_d != previous_up_by.to_d
+      - previous_up_by = up_by
+      %tr
+        %td{class: 'ordinal'}= current_rank
+        %td{class: 'person-name'}= link_to(person.name.upcase, event_person_path(@event, person))
+        - if show_league
+          %td{class: 'league-name'}= link_to(person.league.name.upcase, event_league_path(@event, person.league))
+        %td{class: "#{positive} text-right weight"}= "#{up_by.round(3)} #{person.percentage_change.round(2)}"
+    - unranked_people.each do |person|
+      %tr
+        %td
+        %td{class: 'person-name'}= link_to(person.name.upcase, event_person_path(@event, person))
+        - if show_league
+          %td{class: 'league-name'}= link_to(person.league.name.upcase, event_league_path(@event, person.league))
+        %td
+
+%br
+%br
+%br
+%br
+%br
